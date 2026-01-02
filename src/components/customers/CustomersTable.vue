@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Customer } from '@/models/customer.ts'
 import UserName from '@/components/customers/UserName.vue'
+import {formattedDate} from "@/utils/formattedDate";
 
 const props = defineProps<{
   customers: Customer[]
@@ -10,16 +11,6 @@ const emit = defineEmits(['onMakeActive'])
 
 const makeActive = async (id: string) => emit('onMakeActive', id)
 
-const formattedDate = (fDate: Date) => {
-  // Extract year, month, and day
-  if (!fDate) fDate = new Date()
-  const year = fDate.getFullYear()
-  const month = (fDate.getMonth() + 1).toString().padStart(2, '0') // Months are 0-indexed
-  const day = fDate.getDate().toString().padStart(2, '0')
-
-  // Format the date as "YYYY-MM-DD"
-  return `${year}-${month}-${day}`
-}
 
 const stringToDate = (date: string | Date) => {
   return typeof date === 'string' ? new Date(date) : date
@@ -75,7 +66,7 @@ const stringToDate = (date: string | Date) => {
         <tr v-for="customer in customers" :key="customer.id">
           <td class="p-2 align-top">
             <div class="relative w-full">
-              <img :src="customer.image" class="object-cover p-1" :alt="customer.name" />
+              <img :src="customer.image" class="h-15 w-15 p-1 object-cover" :alt="customer.name" />
             </div>
           </td>
           <td class="px-2 align-top">{{ customer.name }}</td>
@@ -87,7 +78,7 @@ const stringToDate = (date: string | Date) => {
           <td class="px-2 align-top">{{ customer.active ? 'Active' : 'Inactive' }}</td>
           <td class="px-2 align-top">{{ customer.notes }}</td>
           <td class="px-2 align-top">
-            <UserName :id="customer.userId" />
+            <UserName :id="customer.userId as string" />
           </td>
           <td class="flex items-center justify-center gap-2 px-2 align-middle">
             <router-link
@@ -97,7 +88,7 @@ const stringToDate = (date: string | Date) => {
               Detail
             </router-link>
             <router-link
-              :to="`/customers/${customer.id}/edit`"
+              :to="`/customers/${customer.id as string}/edit`"
               class="px-2 py-1 bg-white text-yellow-900 border border-yellow-900 hover:bg-yellow-900 hover:text-white font-bold rounded-md"
             >
               Edit
@@ -109,7 +100,7 @@ const stringToDate = (date: string | Date) => {
               Delete
             </router-link>
             <button
-              @click="makeActive(customer.id)"
+              @click="makeActive(customer.id as string)"
               class="flex items-center px-2 py-1 bg-white text-green-900 border border-green-900 hover:bg-green-900 hover:text-white font-bold rounded-md"
             >
               {{ customer.active ? 'Inactive?' : 'Active?' }}

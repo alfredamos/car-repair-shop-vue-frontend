@@ -2,7 +2,7 @@
 import { User } from '@/models/auth/user.model'
 
 const props = defineProps<{
-  users: User[];
+  users: User[]
 }>()
 
 const emit = defineEmits<{
@@ -62,7 +62,7 @@ const changeRole = (user: User) => {
         <tr v-for="user in users" :key="user.id">
           <td class="m-1">
             <div class="relative w-full">
-              <img :src="user.image" class="object-cover p-1" :alt="user.name" />
+              <img :src="user.image" class="h-15 w-15 p-1 object-cover" :alt="user.name" />
             </div>
           </td>
           <td class="px-2 align-top">{{ user.name }}</td>

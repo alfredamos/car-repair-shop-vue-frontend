@@ -30,7 +30,7 @@ const submitForm = async (customer: Customer) => {
 </script>
 
 <template>
-  <CustomerForm :form-label="formLabel" :initialCustomerInfo="initialCustomerInfo" @back="backButton" @reset="resetButton" @submit="submitForm($event)"/>
+  <CustomerForm v-model:customerForm="initialCustomerInfo" :form-label="formLabel" :initialCustomerInfo="initialCustomerInfo" @back="backButton" @reset="resetButton" @submit="submitForm($event)"/>
 </template>
 
 <style scoped></style>

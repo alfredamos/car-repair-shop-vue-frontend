@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineModel } from 'vue'
 import { Customer } from '@/models/customer.ts'
 
 const props = defineProps<{

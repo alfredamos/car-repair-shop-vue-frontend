@@ -11,6 +11,13 @@ import UserDetailPage from '@/pages/users/UserDetailPage.vue'
 import CustomerDetailPage from '@/pages/customers/CustomerDetailPage.vue'
 import CustomerAddPage from '@/pages/customers/CustomerAddPage.vue'
 import CustomerEdit from '@/pages/customers/CustomerEdit.vue'
+import TicketListPage from '@/pages/tickets/TicketListPage.vue'
+import IncompletedTickets from '@/pages/tickets/IncompletedTickets.vue'
+import CompletedTickets from '@/pages/tickets/CompletedTickets.vue'
+import TicketsByEmailPage from '@/pages/tickets/TicketsByEmailPage.vue'
+import TicketDetailPage from '@/pages/tickets/TicketDetailPage.vue'
+import TicketAddPage from '@/pages/tickets/TicketAddPage.vue'
+import TicketEditPage from '@/pages/tickets/TicketEditPage.vue'
 
 
 
@@ -40,6 +47,23 @@ const router = createRouter({
       component: InactiveCustomers,
       name: 'inactive-customers',
     },
+
+    { path: '/tickets', component: TicketListPage, name: 'tickets' },
+    { path: '/tickets/add', component: TicketAddPage, name: 'ticket-add' },
+    { path: '/tickets/completed-tickets', component: CompletedTickets, name: 'completed-tickets' },
+    {
+      path: '/tickets/incomplete-tickets',
+      component: IncompletedTickets,
+      name: 'incomplete-tickets',
+    },
+    {
+      path: '/tickets/get-tickets-by-email/:emailParam',
+      component: TicketsByEmailPage,
+      name: 'tickets-by-email',
+    },
+    { path: '/tickets/:id/delete', component: TicketDetailPage, name: 'ticket-delete' },
+    { path: '/tickets/:id/detail', component: TicketDetailPage, name: 'ticket-detail' },
+    { path: '/tickets/:id/edit', component: TicketEditPage, name: 'ticket-edit' },
 
     { path: '/users', component: UsersListPage, name: 'users' },
     { path: '/users/:id/detail', component: UserDetailPage, name: 'user-detail' },

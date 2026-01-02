@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import {defineModel} from 'vue';
   import {Gender} from '@/models/Gender.ts';
   import type { EditUserProfileModel } from '@/models/auth/EditUserProfileModel.ts'
 

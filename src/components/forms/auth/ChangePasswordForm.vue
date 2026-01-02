@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineModel } from 'vue';
 import type { ChangeUserPasswordModel } from '@/models/auth/ChangeUserPasswordModel.ts'
 
 const changeUserPasswordForm = defineModel<ChangeUserPasswordModel>("changeUserPassword", {required: true})
