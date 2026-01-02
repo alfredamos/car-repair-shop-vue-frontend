@@ -21,11 +21,13 @@ import TicketEditPage from '@/pages/tickets/TicketEditPage.vue'
 import {useAuthServiceStore} from '@/stores/auth/auth.service.ts'
 import { Role } from '@/models/Role.ts'
 import UnauthorizedPage from '@/pages/UnauthorizedPage.vue'
+import HomePage from '@/pages/HomePage.vue'
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    { path: '/', component: HomePage, name: 'home' },
     { path: '/login', component: LoginUserPage, name: 'login' },
     { path: '/signup', component: SignupUserPage, name: 'signup' },
     {

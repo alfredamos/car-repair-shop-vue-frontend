@@ -28,7 +28,7 @@ const refreshUserToken = async () => {
       <div class="flex justify-between items-center">
         <!-- Logo -->
         <div class="flex items-center">
-          <router-link to="/public" class="text-white text-2xl font-bold">Logo</router-link>
+          <router-link to="/" class="text-white text-2xl font-bold">Logo</router-link>
         </div>
 
         <!-- Desktop Menu -->
