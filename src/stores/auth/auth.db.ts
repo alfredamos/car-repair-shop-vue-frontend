@@ -11,6 +11,7 @@ import type { SignupUserModel } from '@/models/auth/SignupUserModel.ts'
 import { ResponseMessage } from '@/models/ResponseMessage.ts'
 import { useAuthServiceStore } from '@/stores/auth/auth.service.ts'
 
+
 export const useAuthDbStore = defineStore('auth-db', () => {
   const userSession = ref(new UserSession());
   const user = ref(new User());
@@ -18,6 +19,7 @@ export const useAuthDbStore = defineStore('auth-db', () => {
   const error = ref<unknown | null>(null)
 
   const authService = useAuthServiceStore();
+
   async function changeUserPassword(changeUserPasswordModel: ChangeUserPasswordModel){
     try {
       const response = await Axios.patch<ResponseMessage>("/auth/change-password", changeUserPasswordModel);
@@ -135,9 +137,7 @@ export const useAuthDbStore = defineStore('auth-db', () => {
 
   function removeStoresAndLocalStorages() {
     authService.removeSession();
-    //this.customerService.removeCustomers();
-    //this.ticketService.removeTickets();
-    //this.userService.removeUsers();
+
   }
 
 

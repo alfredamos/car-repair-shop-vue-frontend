@@ -2,8 +2,19 @@
 
 <template>
   <div class="h-dvh flex justify-center items-center">
-    <h1 class="font-bold p-10 bg-red-200 ring-1 ring-red-200 rounded-lg shadow-lg text-black">
-      You are not authorized to access this page!
-    </h1>
+    <div class="flex flex-col justify-center items-center gap-4">
+      <div
+        class="font-bold p-10 bg-red-200 ring-1 ring-red-200 rounded-lg shadow-lg text-black vertical-mid"
+      >
+        <h1 class="text-center text-red-500 text-3xl">403</h1>
+        <p>
+          You are not authorized to access this page!<router-link
+            to="/login"
+            class="text-indigo-900 hover:text-green-900 ml-4"
+            >Login&rarr;</router-link
+          >
+        </p>
+      </div>
+    </div>
   </div>
 </template>

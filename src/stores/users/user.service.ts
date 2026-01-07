@@ -13,6 +13,7 @@ export const useUserServiceStore = defineStore('user-service', () => {
 
   const removeUsers = ()=> {
     usersState.value = [];
+    setLocalStorage([]);
     removeStorage();
   }
 
@@ -37,6 +38,6 @@ export const useUserServiceStore = defineStore('user-service', () => {
     return (usersState.value?.find(user => user.email === email) ?? getLocalStorage()?.find(user => user.email === email)) as User;
   }
 
-  return {users, updateUsers, setLocalStorage, findUserById, findUserByEmail}
+  return {users, updateUsers, setLocalStorage, findUserById, findUserByEmail, removeUsers}
 
 })

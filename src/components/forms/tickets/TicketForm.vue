@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import {Ticket} from '@/models/ticket.ts';
+import { Ticket } from '@/models/ticket.ts'
 import type { Customer } from '@/models/customer.ts'
 import type { User } from '@/models/auth/user.model.ts'
 
 const props = defineProps<{
-  customers: Customer[];
-  formLabel: string;
-  users: User[];
-}>();
+  customers: Customer[]
+  formLabel: string
+  users: User[]
+}>()
 
-const emits = defineEmits<{(e: 'onSubmit', ticket: Ticket): void, (e: 'onBack'): void}>();
+const emits = defineEmits<{ (e: 'onSubmit', ticket: Ticket): void; (e: 'onBack'): void; (e: 'onReset'): void }>()
 
-const ticketForm = defineModel<Ticket>('ticketForm', {required: true})
+const ticketForm = defineModel<Ticket>('ticketForm', { required: true })
 
-const submitForm = () => emits('onSubmit', ticketForm.value);
+const submitForm = () => emits('onSubmit', ticketForm.value)
 
 const backButton = () => emits('onBack');
 
+const resetButton = () => emits('onReset')
 
 </script>
 
@@ -46,7 +47,9 @@ const backButton = () => emits('onBack');
             v-model="ticketForm.tech"
           >
             <option>Select technician</option>
-            <option v-for="user in props.users" :key="user.id" :value="user.email">{{ user.name }}</option>
+            <option v-for="user in props.users" :key="user.id" :value="user.email">
+              {{ user.name }}
+            </option>
           </select>
         </div>
         <div class="mb-3">
@@ -57,7 +60,9 @@ const backButton = () => emits('onBack');
             v-model="ticketForm.customerId"
           >
             <option>Select customer</option>
-            <option v-for="customer in props.customers" :key="customer.id" :value="customer.id">{{ customer.name }}</option>
+            <option v-for="customer in props.customers" :key="customer.id" :value="customer.id">
+              {{ customer.name }}
+            </option>
           </select>
         </div>
         <div class="mb-3">
@@ -94,7 +99,7 @@ const backButton = () => emits('onBack');
       <button
         type="button"
         class="py-2 px-4 border-2 border-indigo-900 hover:bg-indigo-900 hover:text-white text-indigo-900 font-bold rounded-lg w-full md:w-1/3 mb-4"
-        @click="submitForm($event)"
+        @click="submitForm()"
       >
         Save
       </button>

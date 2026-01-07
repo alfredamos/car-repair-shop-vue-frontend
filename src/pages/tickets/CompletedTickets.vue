@@ -13,12 +13,12 @@ const ticketService = useTicketServiceStore()
 onMounted(async () => {
   const fetchedCustomers = await loadTickets()
   console.log('Loaded tickets:', fetchedCustomers)
-  tickets.value = { ...fetchedCustomers }
+  tickets.value = [ ...fetchedCustomers ]
 })
 
 const jobCompleted = async (ticket: Ticket) => {
   await ticketDb.ticketJobCompleted(ticket.id)
-  tickets.value = { ...(await loadTickets()) }
+  tickets.value = [ ...(await loadTickets()) ]
 }
 
 const loadTickets = async () => {

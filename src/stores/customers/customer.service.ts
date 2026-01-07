@@ -13,6 +13,7 @@ export const useCustomerServiceStore = defineStore('customer-service', () => {
 
   const removeCustomers = ()=>{
     customersState.value= [];
+    setLocalStorage([]);
     removeStorage();
   }
 
@@ -32,5 +33,5 @@ export const useCustomerServiceStore = defineStore('customer-service', () => {
     localStorage.removeItem(LocalStorageKey.customerKey);
   }
 
-  return {customers, updateCustomers, setLocalStorage, findCustomerById}
+  return {customers, updateCustomers, setLocalStorage, findCustomerById, removeCustomers}
 });

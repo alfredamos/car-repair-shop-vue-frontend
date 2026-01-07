@@ -22,6 +22,7 @@ import {useAuthServiceStore} from '@/stores/auth/auth.service.ts'
 import { Role } from '@/models/Role.ts'
 import UnauthorizedPage from '@/pages/UnauthorizedPage.vue'
 import HomePage from '@/pages/HomePage.vue'
+import GetTicketsByCustomerId from '@/pages/tickets/GetTicketsByCustomerId.vue'
 
 
 const router = createRouter({
@@ -130,6 +131,7 @@ const router = createRouter({
       name: 'ticket-edit',
       meta: { roles: ['Admin'] },
     },
+    {path:"/tickets/get-tickets-by-customer-id/:customerId", component: GetTicketsByCustomerId, meta: { roles: ['Admin'] }},
 
     { path: '/users', component: UsersListPage, name: 'users', meta: { roles: ['Admin'] } },
     {
@@ -150,7 +152,9 @@ const router = createRouter({
 // In your router/index.js file, after creating the router instance:
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = useAuthServiceStore()?.sessionAuth?.isLoggedIn;
+  const authServiceStore = useAuthServiceStore();
+  const isAuthenticated =
+    authServiceStore?.isLoggedIn ?? authServiceStore.getLocalStorage()?.isLoggedIn;
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // This route requires auth, check if the user is logged in
@@ -170,8 +174,8 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach((to, from) => {
   const userStore = useAuthServiceStore() // or use inject() in Vue 3.3+
-  console.log('In router-index, userStore', userStore.sessionAuth,)
-  const userRole = userStore.sessionAuth?.role;
+  const userRole = userStore?.role ?? userStore.getLocalStorage()?.role;
+  console.log('In router-index, userRole', userRole)
   const routeRoles = to.meta.roles as string[];
 
   if (routeRoles && !routeRoles.includes(userRole)) {

@@ -13,6 +13,7 @@ export const useTicketServiceStore = defineStore('ticket-service', () => {
 
   const removeTickets = ()=> {
     ticketsState.value = [];
+    setLocalStorage([]);
     removeStorage();
   }
 
@@ -33,5 +34,5 @@ export const useTicketServiceStore = defineStore('ticket-service', () => {
     localStorage.removeItem(LocalStorageKey.ticketKey);
   }
 
-  return {tickets, updateTickets, setLocalStorage, findTicketById}
+  return {tickets, updateTickets, setLocalStorage, findTicketById, removeTickets}
 });

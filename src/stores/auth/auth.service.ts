@@ -4,6 +4,10 @@ import { UserSession } from '@/models/auth/UserSession.ts'
 import { User } from '@/models/auth/user.model.ts'
 import { LocalStorageKey } from '@/models/LocalStorageKey.ts'
 import { initialUserSession } from '@/stores/auth/initialUserSession.ts'
+import { useCustomerServiceStore } from '@/stores/customers/customer.service.ts'
+import { useTicketServiceStore } from '@/stores/tickets/ticket.service.ts'
+import { useUserServiceStore } from '@/stores/users/user.service.ts'
+
 
 export const useAuthServiceStore = defineStore('auth-service', () => {
  const authSession = ref<UserSession>(new UserSession())
@@ -13,8 +17,12 @@ export const useAuthServiceStore = defineStore('auth-service', () => {
   const isLoggedIn = computed(() => authSession.value?.isLoggedIn || getLocalStorage()?.isLoggedIn);
   const email = computed(() => authSession.value?.email || getLocalStorage()?.email);
   const userCurrent = computed(() => currentUser.value || getCurrentUserLocalStorage());
+  const role = computed(() => authSession.value?.role || getLocalStorage()?.role)
   const sessionAuth = computed(() => authSession.value || getLocalStorage());
 
+  const customerService = useCustomerServiceStore();
+  const ticketService = useTicketServiceStore();
+  const userService = useUserServiceStore();
 
   function setSession(userSession: UserSession){
     authSession.value = userSession;
@@ -26,6 +34,9 @@ export const useAuthServiceStore = defineStore('auth-service', () => {
     removeCurrentUser();
     removeCurrentUserLocalStorage();
     removeStorage();
+    customerService.removeCustomers();
+    ticketService.removeTickets();
+    userService.removeUsers();
   }
 
   function setLocalStorage(session: UserSession){
@@ -66,11 +77,11 @@ export const useAuthServiceStore = defineStore('auth-service', () => {
     isAdmin,
     email,
     userCurrent,
-    sessionAuth
-  , setSession,
+    sessionAuth,
+    getLocalStorage,
+    setSession,
     setLocalStorage,
     removeSession,
-    setCurrentUserLocalStorage
-  , updateCurrentUser
-  , removeCurrentUserLocalStorage}
+    role
+  }
 });

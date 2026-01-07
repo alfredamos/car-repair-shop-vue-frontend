@@ -20,7 +20,7 @@ const jobCompleted = (ticket: Ticket) =>{
 
 <template>
   <template v-if="props.tickets.length === 0">
-    <div class="flex justify-between items-center mx-20 my-10">
+    <div class="flex justify-between items-center mt-5 mx-20">
       <span class="font-bold">Add New Ticket</span>
       <router-link
         class="flex-end px-4 py-1 bg-white text-indigo-900 border border-indigo-900 hover:bg-indigo-900 hover:text-white font-bold rounded-lg"
@@ -34,7 +34,7 @@ const jobCompleted = (ticket: Ticket) =>{
       </h1>
     </div>
   </template>
-  <div v-else class="overflow-x-auto overflow-y-auto mt-10 max-w-sm md:max-w-2xl mx-auto">
+  <div v-else class="overflow-x-auto overflow-y-auto mt-5 max-w-sm md:max-w-2xl mx-auto">
     <hr class="h-px my-4 bg-gray-200 border-0" />
     <h4 class="text-center text-xl font-bold">List of Tickets</h4>
     <hr class="h-px my-4 bg-gray-200 border-0" />
